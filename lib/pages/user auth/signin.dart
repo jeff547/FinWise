@@ -1,4 +1,7 @@
 import 'package:fin_wise/pages/user%20auth/forgot_password.dart';
+import 'package:fin_wise/pages/user%20auth/signup.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
@@ -22,7 +25,7 @@ class _SignInPageState extends State<SignInPage> {
             const Expanded(
               flex: 1,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 28.0, horizontal: 20),
+                padding: EdgeInsets.symmetric(vertical: 22.0, horizontal: 20),
                 child: Text(
                   'Welcome Back!        Glad to see you again',
                   textAlign: TextAlign.center,
@@ -162,9 +165,69 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ),
                           ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 60,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.facebook,
+                            color: Colors.blue,
+                            size: 50,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Image.asset('lib/assets/google.png', width: 40),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.apple,
+                            size: 50,
+                          ),
                         )
                       ],
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 80, bottom: 30),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            const TextSpan(
+                              text: "Don't have an Account?  ",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14),
+                            ),
+                            TextSpan(
+                              text: 'Register Now',
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 6, 200, 230),
+                                fontWeight: FontWeight.w900,
+                                fontSize: 14,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpPage()),
+                                  );
+                                },
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
