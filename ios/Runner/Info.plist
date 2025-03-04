@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- Google Sign-in Section -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.663657535000-g1gpe7t94v68pk3ha0pk15upjiui4hps</string>
+			</array>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>663657535000-g1gpe7t94v68pk3ha0pk15upjiui4hps.apps.googleusercontent.com</string>
+	<key>keychain-access-groups</key>
+	<array>
+			<string>$(AppIdentifierPrefix)com.google.GIDSignIn</string>
+	</array>
+	<!-- End of the Google Sign-in Section -->
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

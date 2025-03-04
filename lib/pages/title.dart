@@ -1,6 +1,10 @@
+import 'package:fin_wise/pages/dashboard/home.dart';
 import 'package:fin_wise/pages/login.dart';
+import 'package:fin_wise/services/socials_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:provider/provider.dart';
 
 class TitlePage extends StatefulWidget {
   const TitlePage({super.key});
@@ -10,11 +14,10 @@ class TitlePage extends StatefulWidget {
 }
 
 class _TitlePageState extends State<TitlePage> {
-  Route _createFadeTransitionRoute() {
+  Route _createFadeTransitionRoute(Widget page) {
     return PageRouteBuilder(
       transitionDuration: const Duration(seconds: 2),
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          const LoginPage(),
+      pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,
@@ -27,12 +30,20 @@ class _TitlePageState extends State<TitlePage> {
   @override
   void initState() {
     super.initState();
-
-    if (mounted) {
-      Timer(const Duration(milliseconds: 1000), () {
-        Navigator.pushReplacement(context, _createFadeTransitionRoute());
-      });
-    }
+    final authService = Provider.of<AuthService>(context, listen: false);
+    Timer(const Duration(milliseconds: 1000), () {
+      if (authService.user == null) {
+        Navigator.pushReplacement(
+          context,
+          _createFadeTransitionRoute(const LoginPage()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          _createFadeTransitionRoute(const HomePage()),
+        );
+      }
+    });
   }
 
   @override
