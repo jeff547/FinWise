@@ -5,10 +5,12 @@ class TextInputForm extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
+    this.blurText = false,
   });
 
   final TextEditingController controller;
   final String hintText;
+  final bool blurText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class TextInputForm extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 20, top: 7, bottom: 8),
         child: TextField(
-          obscureText: true,
+          obscureText: blurText,
           controller: controller,
           decoration: InputDecoration(
             border: InputBorder.none,

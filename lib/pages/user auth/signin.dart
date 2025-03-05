@@ -1,4 +1,5 @@
 import 'package:fin_wise/components.dart';
+import 'package:fin_wise/pages/dashboard/home.dart';
 import 'package:fin_wise/services/socials_sign_in.dart';
 import 'package:fin_wise/pages/user%20auth/forgot_password.dart';
 import 'package:fin_wise/pages/user%20auth/signup.dart';
@@ -38,21 +39,21 @@ class _SignInPageState extends State<SignInPage> {
             FocusScope.of(context).unfocus();
           },
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Flexible(
                 flex: 1,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 22.0, horizontal: 20),
+                  padding: const EdgeInsets.only(
+                      top: 15.0, left: 20, right: 20, bottom: 35),
                   child: Text(
-                    'Welcome Back!          Glad to see you again',
+                    'Welcome Back!\nGlad to see you again!',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.rubik(
                       textStyle: const TextStyle(
-                        fontSize: 37,
+                        height: 1.7,
+                        fontSize: 32,
                         fontWeight: FontWeight.w600,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -82,10 +83,14 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 25.0, left: 25, right: 25),
+                          top: 25.0,
+                          left: 25,
+                          right: 25,
+                        ),
                         child: TextInputForm(
                           controller: _passwordController,
                           hintText: 'Enter your password',
+                          blurText: true,
                         ),
                       ),
                       Align(
@@ -93,10 +98,11 @@ class _SignInPageState extends State<SignInPage> {
                         alignment: Alignment.centerRight,
                         child: TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(
+                              Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ResetPasswordPage()),
+                                  builder: (context) =>
+                                      const ResetPasswordPage(),
+                                ),
                               );
                             },
                             child: const Text('Forgot Password?')),
@@ -119,14 +125,26 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                             onPressed: () async {
                               try {
-                                await authService?.signInWithEmailAndPassword(
-                                  _emailController.text.trim(),
-                                  _passwordController.text.trim(),
-                                );
+                                if (await authService
+                                        .signInWithEmailAndPassword(
+                                      _emailController.text.trim(),
+                                      _passwordController.text.trim(),
+                                    ) !=
+                                    null) {
+                                  if (!context.mounted) return;
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                }
                               } catch (e) {
-                                // ignore: use_build_context_synchronously
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(e.toString())));
+                                if (!context.mounted) return;
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  duration: const Duration(seconds: 2),
+                                  content: Text(e.toString()),
+                                ));
                               }
                             },
                             child: const Padding(
@@ -194,16 +212,20 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           IconButton(
                             onPressed: () {
-                              authService?.signinWithGoogle();
+                              authService.signinWithGoogle();
                             },
-                            icon:
-                                Image.asset('lib/assets/google.png', width: 40),
+                            icon: Image.asset(
+                              'lib/assets/google.png',
+                              width: 40,
+                            ),
                           ),
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.apple,
-                              size: 50,
+                            onPressed: () {
+                              authService.signInWithTwitter();
+                            },
+                            icon: Image.asset(
+                              'twitter.png',
+                              width: 40,
                             ),
                           )
                         ],
@@ -249,7 +271,7 @@ class CreateNewAccount extends StatelessWidget {
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => const SignUpPage()),
                   );
                 },
