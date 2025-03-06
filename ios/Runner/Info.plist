@@ -2,40 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- Twitter Sign In-->
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string></string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>REMOVED</string>
-			</array>
-		</dict>
-	</array>
-	<!--End of Twitter Sign in-->
-	<!-- Google Sign-in Section -->
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.663657535000-g1gpe7t94v68pk3ha0pk15upjiui4hps</string>
-			</array>
-		</dict>
-	</array>
-	<key>GIDClientID</key>
-	<string>663657535000-g1gpe7t94v68pk3ha0pk15upjiui4hps.apps.googleusercontent.com</string>
-	<key>keychain-access-groups</key>
-	<array>
-			<string>$(AppIdentifierPrefix)com.google.GIDSignIn</string>
-	</array>
-	<!-- End of the Google Sign-in Section -->
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -56,8 +22,32 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.663657535000-g1gpe7t94v68pk3ha0pk15upjiui4hps</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>1155875808981684</string>
+	<key>FacebookClientToken</key>
+	<string>955ebf1d173ca5da1eddb1434cf8c653</string>
+	<key>FacebookDisplayName</key>
+	<string>FinWise</string>
+	<key>GIDClientID</key>
+	<string>663657535000-g1gpe7t94v68pk3ha0pk15upjiui4hps.apps.googleusercontent.com</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
@@ -69,15 +59,17 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.google.GIDSignIn</string>
 	</array>
 </dict>
 </plist>

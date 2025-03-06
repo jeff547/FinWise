@@ -203,7 +203,9 @@ class _SignInPageState extends State<SignInPage> {
                         spacing: 60,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              authService.signInWithFacebook();
+                            },
                             icon: const Icon(
                               Icons.facebook,
                               color: Colors.blue,
@@ -224,8 +226,8 @@ class _SignInPageState extends State<SignInPage> {
                               authService.signInWithTwitter();
                             },
                             icon: Image.asset(
-                              'twitter.png',
-                              width: 40,
+                              'lib/assets/twitter.png',
+                              width: 50,
                             ),
                           )
                         ],
