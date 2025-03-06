@@ -18,6 +18,16 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _confirmPasswordController.dispose();
+    _passwordController.dispose();
+    _emailController.dispose();
+    _nameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
