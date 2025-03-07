@@ -28,11 +28,10 @@ class AuthService extends ChangeNotifier {
   ) async {
     try {
       log('Sign in Successful');
-      UserCredential? cred = await _auth.signInWithEmailAndPassword(
+      return await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return cred;
     } on Exception catch (e) {
       log(e.toString());
       return null;
@@ -61,7 +60,7 @@ class AuthService extends ChangeNotifier {
       );
       await _auth.currentUser!.updateDisplayName(name);
       log('Account creation successful');
-      return 'Account creation successful!';
+      return 'Account creation successful';
     } on Exception catch (e) {
       log(e.toString());
       return e.toString();
