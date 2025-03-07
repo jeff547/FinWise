@@ -224,8 +224,8 @@ class _SignInPageState extends State<SignInPage> {
                               authService.signInWithTwitter();
                             },
                             icon: Image.asset(
-                              'twitter.png',
-                              width: 40,
+                              'lib/assets/twitter.png',
+                              width: 50,
                             ),
                           )
                         ],
