@@ -96,14 +96,24 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  //incomplete
   Future<UserCredential?> signInWithFacebook() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login();
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+      if (loginResult.status == LoginStatus.success) {
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(
+                loginResult.accessToken!.tokenString);
 
-    return await _auth.signInWithCredential(facebookAuthCredential);
+        return await _auth.signInWithCredential(facebookAuthCredential);
+      } else {
+        print('Facebook login failed: ${loginResult.message}');
+        return null;
+      }
+    } catch (e) {
+      print('Error during Facebook login: $e');
+      return null;
+    }
   }
 
   Future<UserCredential?> signInWithTwitter() async {

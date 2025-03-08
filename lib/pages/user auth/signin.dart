@@ -3,6 +3,8 @@ import 'package:fin_wise/pages/dashboard/home.dart';
 import 'package:fin_wise/services/socials_sign_in.dart';
 import 'package:fin_wise/pages/user%20auth/forgot_password.dart';
 import 'package:fin_wise/pages/user%20auth/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,7 +46,7 @@ class _SignInPageState extends State<SignInPage> {
                 flex: 1,
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      top: 15.0, left: 20, right: 20, bottom: 35),
+                      top: 15.0, left: 20, right: 20, bottom: 40),
                   child: Text(
                     'Welcome Back!\nGlad to see you again!',
                     textAlign: TextAlign.center,
@@ -203,7 +205,21 @@ class _SignInPageState extends State<SignInPage> {
                         spacing: 60,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              UserCredential? cred =
+                                  await authService.signInWithFacebook();
+                              if (context.mounted) {
+                                if (cred != null) {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                } else {
+                                  _showSignInErrorDialog(context);
+                                }
+                              }
+                            },
                             icon: const Icon(
                               Icons.facebook,
                               color: Colors.blue,
@@ -211,8 +227,20 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {
-                              authService.signinWithGoogle();
+                            onPressed: () async {
+                              UserCredential? cred =
+                                  await authService.signinWithGoogle();
+                              if (context.mounted) {
+                                if (cred != null) {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                } else {
+                                  _showSignInErrorDialog(context);
+                                }
+                              }
                             },
                             icon: Image.asset(
                               'lib/assets/google.png',
@@ -220,8 +248,20 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {
-                              authService.signInWithTwitter();
+                            onPressed: () async {
+                              UserCredential? cred =
+                                  await authService.signInWithTwitter();
+                              if (context.mounted) {
+                                if (cred != null) {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                } else {
+                                  _showSignInErrorDialog(context);
+                                }
+                              }
                             },
                             icon: Image.asset(
                               'lib/assets/twitter.png',
@@ -281,4 +321,24 @@ class CreateNewAccount extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showSignInErrorDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return CupertinoAlertDialog(
+        title: Text("Sign-In Error"),
+        content: Text("An error occurred while signing in. Please try again."),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    },
+  );
 }
