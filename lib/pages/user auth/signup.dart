@@ -1,6 +1,6 @@
 import 'package:fin_wise/pages/dashboard/home.dart';
 import 'package:fin_wise/pages/user%20auth/signin.dart';
-import 'package:fin_wise/services/socials_sign_in.dart';
+import 'package:fin_wise/services/userProvider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _nameController = TextEditingController();
+  bool loading = false;
 
   @override
   void dispose() {
@@ -115,8 +116,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               ),
                               onPressed: () async {
+                                setState(() {
+                                  loading = true;
+                                });
                                 try {
-                                  String response =
+                                  String? response =
                                       await AuthService().createNewUser(
                                     email: _emailController.text.trim(),
                                     password: _passwordController.text.trim(),
@@ -125,19 +129,16 @@ class _SignUpPageState extends State<SignUpPage> {
                                     name: _nameController.text.trim(),
                                   );
                                   if (!context.mounted) return;
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    duration: const Duration(seconds: 2),
-                                    content: Text(response),
-                                  ));
-                                  if (response ==
-                                      'Account creation successful') {
+                                  if (response != null) {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                         builder: (context) => const HomePage(),
                                       ),
                                     );
                                   }
+                                  setState(() {
+                                    loading = false;
+                                  });
                                 } catch (e) {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
@@ -146,17 +147,23 @@ class _SignUpPageState extends State<SignUpPage> {
                                   ));
                                 }
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.all(18.0),
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
+                              child: loading
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : const Padding(
+                                      padding: EdgeInsets.all(18.0),
+                                      child: Text(
+                                        'Sign Up',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
                             ),
                           ),
                         ),

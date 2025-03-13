@@ -1,6 +1,6 @@
 import 'package:fin_wise/pages/dashboard/home.dart';
 import 'package:fin_wise/pages/login.dart';
-import 'package:fin_wise/services/socials_sign_in.dart';
+import 'package:fin_wise/services/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -32,6 +32,7 @@ class _TitlePageState extends State<TitlePage> {
     super.initState();
     final authService = Provider.of<AuthService>(context, listen: false);
     Timer(const Duration(milliseconds: 1000), () {
+      print(authService.user);
       if (authService.user == null) {
         Navigator.pushReplacement(
           context,
