@@ -129,14 +129,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                     name: _nameController.text.trim(),
                                   );
                                   if (!context.mounted) return;
-                                  if (response != null) {
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (context) => const HomePage(),
-                                      ),
-                                    );
-                                  }
-                                  setState(() {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                                                  setState(() {
                                     loading = false;
                                   });
                                 } catch (e) {

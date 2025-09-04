@@ -77,11 +77,9 @@ class _HomePageState extends State<HomePage>
       lastDate: DateTime(2100),
     );
 
-    if (pickedDate != null) {
-      setModalState(() {
-        _selectedDate = pickedDate;
-      });
-    }
+    setModalState(() {
+      _selectedDate = pickedDate;
+    });
   }
 
   //handles date
@@ -417,7 +415,7 @@ class _HomePageState extends State<HomePage>
                           fontSize: 20,
                         ),
                       ),
-                      const SizedBox(width: 100),
+                      const SizedBox(width: 80),
                       GestureDetector(
                         onTap: () {
                           setState(
@@ -887,8 +885,8 @@ class _HomePageState extends State<HomePage>
                   child: Padding(
                     padding: EdgeInsets.only(
                       top: 65,
-                      left: 90,
-                      right: 90,
+                      left: 80,
+                      right: 80,
                     ),
                     child: Text(
                       'Financial Insights',
@@ -979,7 +977,8 @@ class _HomePageState extends State<HomePage>
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(15),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 30),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1042,7 +1041,8 @@ class _HomePageState extends State<HomePage>
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(15),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 30),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1105,6 +1105,7 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
                 Container(
+                  width: 310,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.white,
@@ -1112,7 +1113,6 @@ class _HomePageState extends State<HomePage>
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 30,
-                      horizontal: 50,
                     ),
                     child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseAuth.instance.currentUser == null
@@ -1550,7 +1550,7 @@ class _HomePageState extends State<HomePage>
                                   fontSize: 18,
                                 ),
                               ),
-                              const SizedBox(width: 100),
+                              const SizedBox(width: 90),
                               Container(
                                 decoration: BoxDecoration(
                                   color: Colors.grey[200],
@@ -1594,7 +1594,7 @@ class _HomePageState extends State<HomePage>
                                   fontSize: 18,
                                 ),
                               ),
-                              const SizedBox(width: 105),
+                              const SizedBox(width: 90),
                               Switch.adaptive(
                                 applyCupertinoTheme: true,
                                 value: darkMode,
