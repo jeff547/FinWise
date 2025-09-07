@@ -1,6 +1,6 @@
 import 'package:fin_wise/components.dart';
 import 'package:fin_wise/pages/dashboard/home.dart';
-import 'package:fin_wise/services/userProvider.dart';
+import 'package:fin_wise/services/user_provider.dart';
 import 'package:fin_wise/pages/user%20auth/forgot_password.dart';
 import 'package:fin_wise/pages/user%20auth/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';

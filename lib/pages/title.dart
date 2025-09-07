@@ -1,6 +1,6 @@
 import 'package:fin_wise/pages/dashboard/home.dart';
 import 'package:fin_wise/pages/login.dart';
-import 'package:fin_wise/services/userProvider.dart';
+import 'package:fin_wise/services/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 

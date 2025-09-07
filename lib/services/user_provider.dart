@@ -170,7 +170,7 @@ class AuthService extends ChangeNotifier {
         },
       ).catchError((error) {
         print(
-          "Password can't be changed" + error.toString(),
+          "Password can't be changed$error",
         );
       });
     }
