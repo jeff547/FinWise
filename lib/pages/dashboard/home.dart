@@ -736,29 +736,56 @@ class _HomePageState extends State<HomePage>
                               ),
                               Flexible(
                                 flex: 1,
-                                child: Tooltip(
-                                  triggerMode: TooltipTriggerMode.tap,
-                                  message: 'Sort Order: $sortOrderText',
-                                  child: IconButton(
-                                    onPressed: () {
-                                      setState(
-                                        () {
-                                          isAscending = (isAscending + 1) %
-                                              3; // Cycles through 0, 1, 2
+                                child: IconButton(
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        isAscending = (isAscending + 1) %
+                                            3; // Cycles through 0, 1, 2
 
-                                          if (isAscending == 0) {
-                                            sortOrderText = 'None';
-                                          } else if (isAscending == 1) {
-                                            sortOrderText = 'Descending';
-                                          } else {
-                                            sortOrderText = 'Ascending';
-                                          }
-                                        },
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.filter_list,
-                                    ),
+                                        if (isAscending == 0) {
+                                          sortOrderText = 'None';
+                                        } else if (isAscending == 1) {
+                                          sortOrderText = 'Descending';
+                                        } else {
+                                          sortOrderText = 'Ascending';
+                                        }
+                                      },
+                                    );
+                                    // Remove any currently visible SnackBar
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
+
+                                    // Show new SnackBar
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.transparent,
+                                        elevation: 0,
+                                        content: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 24, vertical: 8),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 80),
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[300],
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          child: Text(
+                                            sortOrderText,
+                                            style: TextStyle(
+                                                color: Colors.grey[700],
+                                                fontWeight: FontWeight.w600),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                        duration: Duration(seconds: 1),
+                                        behavior: SnackBarBehavior.floating,
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(
+                                    Icons.filter_list,
                                   ),
                                 ),
                               ),
@@ -978,7 +1005,7 @@ class _HomePageState extends State<HomePage>
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 30),
+                                  vertical: 20, horizontal: 25),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1011,7 +1038,7 @@ class _HomePageState extends State<HomePage>
                                         return Text(
                                           '\$${revenue.toStringAsFixed(2)}',
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.green[700],
                                           ),
@@ -1042,7 +1069,7 @@ class _HomePageState extends State<HomePage>
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 30),
+                                  vertical: 20, horizontal: 25),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1075,7 +1102,7 @@ class _HomePageState extends State<HomePage>
                                         return Text(
                                           '\$${expenses.toStringAsFixed(2)}',
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.red[700],
                                           ),
