@@ -1273,7 +1273,8 @@ class _HomePageState extends State<HomePage>
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(
-                                              'Please enter a valid input')),
+                                              'Please enter a valid input'),
+                                          behavior: SnackBarBehavior.floating),
                                     );
                                   }
                                 },
@@ -1698,6 +1699,7 @@ class _HomePageState extends State<HomePage>
 
   Future<dynamic> addTransactionModal(BuildContext context) {
     return showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
