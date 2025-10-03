@@ -50,6 +50,7 @@ flutter:
     - lib/assets/stocks.png
     - lib/assets/twitter.png
     - lib/assets/profile.png
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

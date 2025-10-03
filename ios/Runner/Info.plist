@@ -11,7 +11,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.663657535000-g1gpe7t94v68pk3ha0pk15upjiui4hps</string>
-				<string>REMOVED</string>
+				<string>https://finwise-762e1.firebaseapp.com/__/auth/handler</string>
 				<string>fb1155875808981684</string>
 			</array>
 		</dict>
